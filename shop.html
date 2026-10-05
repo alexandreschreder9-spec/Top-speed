@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f0e9">
+  <meta name="description" content="Shop the Top Speed card game.">
+  <title>Shop Top Speed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f2f0e9;
+      --ink: #181a18;
+      --muted: #686a63;
+      --red: #f04b31;
+      --lime: #d9f36a;
+      --line: #d6d4cc;
+      --display: "Barlow Condensed", Impact, sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    button { font: inherit; }
+    .topbar { display: flex; min-height: 82px; align-items: center; justify-content: space-between; padding: 18px 6.2%; background: var(--ink); color: white; }
+    .wordmark { display: inline-flex; align-items: center; gap: 10px; color: inherit; font-family: var(--display); font-size: 25px; font-weight: 800; line-height: 1; text-decoration: none; text-transform: uppercase; }
+    .wordmark-mark { display: grid; width: 30px; height: 30px; place-items: center; background: var(--red); color: var(--ink); font-size: 20px; transform: skew(-8deg); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--lime); }
+    .bag-toggle { display: inline-flex; min-height: 40px; align-items: center; gap: 10px; padding: 0 13px; border: 1px solid #777; background: transparent; color: white; cursor: pointer; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .bag-count { display: grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; background: var(--lime); color: var(--ink); }
+    main { max-width: 1260px; margin: 0 auto; padding: 45px 6.2% 100px; }
+    .breadcrumbs { margin: 0 0 38px; color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .breadcrumbs a { text-decoration: none; }
+    .breadcrumbs span { padding: 0 9px; color: var(--red); }
+    .shop-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: clamp(36px, 8vw, 104px); align-items: center; }
+    .product-visual { position: relative; display: grid; min-height: 540px; overflow: hidden; place-items: center; background: #d8d8d0; isolation: isolate; }
+    .product-visual::before { position: absolute; z-index: -2; inset: 0; background: linear-gradient(135deg, rgb(28 31 29 / 8%), rgb(28 31 29 / 40%)), url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=85") center / cover; content: ""; }
+    .product-visual::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(0deg, rgb(0 0 0 / 34%), transparent 56%); content: ""; }
+    .box-art { position: relative; display: flex; width: min(58%, 310px); min-width: 240px; aspect-ratio: .72; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 23px; background: var(--red); box-shadow: 20px 25px 35px rgb(0 0 0 / 38%); color: var(--ink); transform: rotate(-5deg); }
+    .box-art::before { position: absolute; top: 39%; right: -24%; width: 125%; height: 24%; border-top: 5px solid var(--lime); border-bottom: 5px solid var(--lime); content: ""; transform: rotate(-34deg); }
+    .box-top, .box-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .box-title { position: relative; z-index: 1; margin: auto 0; font-family: var(--display); font-size: clamp(60px, 9vw, 105px); font-weight: 800; line-height: .76; text-transform: uppercase; }
+    .box-title span { display: block; color: var(--lime); }
+    .visual-caption { position: absolute; right: 18px; bottom: 16px; left: 18px; display: flex; justify-content: space-between; color: white; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .product-info { padding: 14px 0; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 15px; color: var(--red); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .eyebrow::before { width: 20px; height: 2px; background: var(--red); content: ""; }
+    h1 { margin: 0 0 12px; font-family: var(--display); font-size: clamp(64px, 8vw, 100px); font-weight: 800; line-height: .78; text-transform: uppercase; }
+    .product-subtitle { margin: 22px 0 24px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .price-label { color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; }
+    .price-value { font-family: var(--display); font-size: 27px; font-weight: 700; text-transform: uppercase; }
+    .buy-row { display: grid; grid-template-columns: 112px 1fr; gap: 10px; margin-top: 18px; }
+    .quantity { display: grid; height: 50px; grid-template-columns: 36px 1fr 36px; border: 1px solid var(--line); }
+    .quantity button { border: 0; background: transparent; cursor: pointer; font-size: 17px; }
+    .quantity output { display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+    .add-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 12px; padding: 0 17px; border: 0; background: var(--ink); color: white; cursor: pointer; font-size: 11px; font-weight: 700; text-transform: uppercase; transition: background .2s, color .2s; }
+    .add-button:hover { background: var(--red); color: var(--ink); }
+    .purchase-note { min-height: 34px; margin: 12px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 78px; background: var(--line); border: 1px solid var(--line); }
+    .detail { min-height: 110px; padding: 20px; background: var(--paper); }
+    .detail strong { display: block; margin-bottom: 8px; font-family: var(--display); font-size: 20px; text-transform: uppercase; }
+    .detail span { color: var(--muted); font-size: 11px; line-height: 1.5; }
+    footer { display: flex; min-height: 82px; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 6.2%; background: var(--ink); color: white; }
+    footer small { color: #aaa; font-size: 10px; }
+    footer .wordmark { font-size: 19px; }
+    footer .wordmark-mark { width: 24px; height: 24px; font-size: 16px; }
+    .bag-backdrop { position: fixed; z-index: 4; inset: 0; background: rgb(0 0 0 / 45%); }
+    .bag-panel { position: fixed; z-index: 5; top: 0; right: 0; display: flex; width: min(420px, 100%); height: 100dvh; flex-direction: column; padding: 26px; background: var(--paper); box-shadow: -12px 0 35px rgb(0 0 0 / 15%); }
+    .bag-panel[hidden], .bag-backdrop[hidden] { display: none; }
+    .bag-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+    .bag-head h2 { margin: 0; font-family: var(--display); font-size: 34px; text-transform: uppercase; }
+    .bag-close { width: 38px; height: 38px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 20px; }
+    .bag-items { flex: 1; padding: 20px 0; }
+    .bag-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
+    .bag-line h3 { margin: 0 0 6px; font-family: var(--display); font-size: 24px; text-transform: uppercase; }
+    .bag-line p, .bag-empty { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .remove-button { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 11px; text-decoration: underline; }
+    .bag-footer { padding-top: 17px; border-top: 1px solid var(--line); }
+    .checkout-button { width: 100%; min-height: 48px; margin-top: 14px; border: 0; background: #c4c2ba; color: #555650; cursor: not-allowed; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .checkout-note { margin: 9px 0 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    @media (max-width: 760px) {
+      .topbar { min-height: 72px; padding: 16px 5%; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 9px; }
+      .bag-toggle { min-height: 36px; padding: 0 9px; font-size: 9px; }
+      main { padding: 30px 5% 70px; }
+      .breadcrumbs { margin-bottom: 26px; }
+      .shop-grid { grid-template-columns: 1fr; gap: 28px; }
+      .product-visual { min-height: 440px; }
+      .box-art { width: min(55%, 280px); }
+      .product-info { padding: 0; }
+      .details { margin-top: 50px; }
+    }
+    @media (max-width: 480px) {
+      .wordmark { gap: 7px; font-size: 21px; }
+      .wordmark-mark { width: 26px; height: 26px; font-size: 17px; }
+      .nav-links { gap: 10px; }
+      .nav-links > a { font-size: 8px; }
+      .bag-toggle { gap: 6px; }
+      .product-visual { min-height: 370px; }
+      h1 { font-size: 72px; }
+      .details { grid-template-columns: 1fr; }
+      .detail { min-height: 0; }
+      footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="index.html" aria-label="Top Speed home"><span class="wordmark-mark">T</span> Top Speed</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <button class="bag-toggle" id="open-bag" type="button" aria-haspopup="dialog" aria-controls="bag-panel">Your bag <span class="bag-count" id="bag-count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <p class="breadcrumbs"><a href="index.html">Home</a><span>/</span> Shop</p>
+    <section class="shop-grid" aria-labelledby="product-title">
+      <div class="product-visual" role="img" aria-label="Concept packaging for the Top Speed card game, set against a sports car">
+        <div class="box-art" aria-hidden="true">
+          <div class="box-top"><span>Card game</span><span>TS / 01</span></div>
+          <div class="box-title">Top<span>Speed</span></div>
+          <div class="box-bottom"><span>Quick thinking</span><span>Full throttle</span></div>
+        </div>
+        <div class="visual-caption"><span>Top Speed · Concept packaging</span><span>01 / 01</span></div>
+      </div>
+
+      <div class="product-info">
+        <p class="eyebrow">The starting line</p>
+        <h1 id="product-title">Top Speed</h1>
+        <p class="product-subtitle">The card game for quick decisions, close competition, and one more round. Bring the table together and see who keeps their stuff.</p>
+        <div class="price-row"><span class="price-label">The deck</span><span class="price-value">Price coming soon</span></div>
+        <div class="buy-row">
+          <div class="quantity" aria-label="Quantity">
+            <button id="quantity-down" type="button" aria-label="Decrease quantity">−</button>
+            <output id="quantity" aria-live="polite">1</output>
+            <button id="quantity-up" type="button" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="add-button" id="add-to-bag" type="button">Add to bag <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="purchase-note" id="purchase-note" aria-live="polite">Pricing and checkout details will be announced soon.</p>
+      </div>
+    </section>
+
+    <section class="details" aria-label="Product details">
+      <div class="detail"><strong>One more round</strong><span>Made for lively tables and close finishes.</span></div>
+      <div class="detail"><strong>Made to play</strong><span>A card game built arounds filling your garage with the best cars possible.</span></div>
+      <div class="detail"><strong>Ready for the garage</strong><span>Bring your crew and take your place at the table.</span></div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="wordmark" href="index.html"><span class="wordmark-mark">T</span> Top Speed</a>
+    <small>Quick thinking. Close finishes.</small>
+  </footer>
+
+  <div class="bag-backdrop" id="bag-backdrop" hidden></div>
+  <aside class="bag-panel" id="bag-panel" role="dialog" aria-modal="true" aria-labelledby="bag-title" hidden>
+    <div class="bag-head"><h2 id="bag-title">Your bag</h2><button class="bag-close" id="close-bag" type="button" aria-label="Close bag">×</button></div>
+    <div class="bag-items" id="bag-items" aria-live="polite"></div>
+    <div class="bag-footer"><button class="checkout-button" type="button" disabled>Checkout unavailable</button><p class="checkout-note">A store price and payment provider still need to be connected before orders can be completed.</p></div>
+  </aside>
+
+  <script>
+    const quantityOutput = document.querySelector("#quantity");
+    const bagCount = document.querySelector("#bag-count");
+    const bagItems = document.querySelector("#bag-items");
+    const bagPanel = document.querySelector("#bag-panel");
+    const bagBackdrop = document.querySelector("#bag-backdrop");
+    let quantity = 1;
+    let bagQuantity = Number(localStorage.getItem("top-speed-bag") || 0);
+
+    function renderBag() {
+      bagCount.textContent = bagQuantity;
+      bagItems.innerHTML = bagQuantity
+        ? `<div class="bag-line"><div><h3>Top Speed</h3><p>Card game · Quantity ${bagQuantity}</p></div><button class="remove-button" id="remove-item" type="button">Remove</button></div>`
+        : '<p class="bag-empty">Your bag is waiting for its first deck.</p>';
+      localStorage.setItem("top-speed-bag", String(bagQuantity));
+      document.querySelector("#remove-item")?.addEventListener("click", () => {
+        bagQuantity = 0;
+        renderBag();
+      });
+    }
+
+    function setBagOpen(open) {
+      bagPanel.hidden = !open;
+      bagBackdrop.hidden = !open;
+      document.body.style.overflow = open ? "hidden" : "";
+      if (open) document.querySelector("#close-bag").focus();
+      else document.querySelector("#open-bag").focus();
+    }
+
+    document.querySelector("#quantity-down").addEventListener("click", () => {
+      quantity = Math.max(1, quantity - 1);
+      quantityOutput.value = quantity;
+      quantityOutput.textContent = quantity;
+    });
+    document.querySelector("#quantity-up").addEventListener("click", () => {
+      quantity = Math.min(99, quantity + 1);
+      quantityOutput.value = quantity;
+      quantityOutput.textContent = quantity;
+    });
+    document.querySelector("#add-to-bag").addEventListener("click", () => {
+      bagQuantity = Math.min(99, bagQuantity + quantity);
+      renderBag();
+      setBagOpen(true);
+    });
+    document.querySelector("#open-bag").addEventListener("click", () => setBagOpen(true));
+    document.querySelector("#close-bag").addEventListener("click", () => setBagOpen(false));
+    bagBackdrop.addEventListener("click", () => setBagOpen(false));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !bagPanel.hidden) setBagOpen(false);
+    });
+    renderBag();
+  </script>
+</body>
+</html>
