@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f0e9">
+  <meta name="description" content="Sign up to become a Top Speed game ambassador.">
+  <title>Become an Ambassador — Top Speed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f2f0e9;
+      --ink: #181a18;
+      --muted: #686a63;
+      --red: #f04b31;
+      --lime: #d9f36a;
+      --line: #d6d4cc;
+      --display: "Barlow Condensed", Impact, sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    button, input, textarea { font: inherit; }
+    .edge-navigation { position: fixed; z-index: 3; top: 0; left: 0; width: 14px; height: 100dvh; }
+    .edge-navigation summary { position: absolute; inset: 0 auto 0 0; width: 14px; cursor: pointer; list-style: none; }
+    .edge-navigation summary::-webkit-details-marker { display: none; }
+    .edge-navigation summary::before { position: absolute; top: 50%; left: 0; width: 6px; height: 72px; background: var(--red); content: ""; transform: translateY(-50%); transition: width .2s, height .2s, background .2s; }
+    .edge-navigation summary::after { position: absolute; top: 50%; left: 12px; color: var(--ink); content: "MENU"; font-size: 9px; font-weight: 700; letter-spacing: .12em; opacity: 0; text-transform: uppercase; transform: translateY(-50%) rotate(180deg); transition: opacity .2s; writing-mode: vertical-rl; }
+    .edge-navigation:hover summary::before, .edge-navigation:focus-within summary::before, .edge-navigation[open] summary::before { width: 14px; height: 112px; background: var(--lime); }
+    .edge-navigation:hover summary::after, .edge-navigation:focus-within summary::after, .edge-navigation[open] summary::after { opacity: 1; }
+    .edge-panel { position: fixed; top: 0; left: 0; display: flex; width: min(290px, calc(100vw - 28px)); height: 100dvh; flex-direction: column; padding: 34px 28px; background: var(--ink); box-shadow: 12px 0 35px rgb(0 0 0 / 18%); color: white; transform: translateX(-105%); transition: transform .25s ease; }
+    .edge-navigation:hover .edge-panel, .edge-navigation:focus-within .edge-panel, .edge-navigation[open] .edge-panel { transform: translateX(0); }
+    .wordmark { display: inline-flex; align-items: center; gap: 10px; color: inherit; font-family: var(--display); font-size: 25px; font-weight: 800; line-height: 1; text-decoration: none; text-transform: uppercase; }
+    .wordmark-mark { display: grid; width: 30px; height: 30px; place-items: center; background: var(--red); color: var(--ink); font-size: 20px; transform: skew(-8deg); }
+    .edge-panel .wordmark { margin-bottom: 58px; }
+    .edge-panel-label { margin-bottom: 16px; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .edge-panel-links { display: grid; gap: 4px; }
+    .edge-panel-links a { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgb(255 255 255 / 18%); font-family: var(--display); font-size: 25px; font-weight: 600; text-decoration: none; text-transform: uppercase; }
+    .edge-panel-links a:hover, .edge-panel-links a[aria-current="page"] { color: var(--lime); }
+    .edge-panel-links a span { color: var(--red); font-family: var(--body); font-size: 10px; }
+    .topbar { display: flex; min-height: 82px; align-items: center; justify-content: space-between; padding: 18px 6.2%; background: var(--ink); color: white; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 11px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--lime); }
+    main { max-width: 1160px; margin: 0 auto; padding: 78px 6.2% 110px; }
+    .signup-layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(360px, 1fr); gap: clamp(42px, 9vw, 110px); align-items: start; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 18px; color: var(--red); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .eyebrow::before { width: 20px; height: 2px; background: var(--red); content: ""; }
+    h1, p { margin-top: 0; }
+    h1 { max-width: 480px; margin-bottom: 22px; font-family: var(--display); font-size: clamp(68px, 9vw, 112px); font-weight: 800; line-height: .78; text-transform: uppercase; }
+    h1 span { display: block; color: var(--red); }
+    .signup-copy { max-width: 430px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .signup-copy p { margin-bottom: 18px; }
+    .setup-note { padding: 16px 18px; border-left: 3px solid var(--red); background: #e8e6de; color: var(--ink); font-size: 12px; line-height: 1.6; }
+    .signup-form { display: grid; gap: 19px; padding: clamp(24px, 4vw, 40px); background: white; }
+    .name-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: grid; gap: 8px; }
+    .field label { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .field input, .field textarea { width: 100%; border: 1px solid var(--line); border-radius: 0; background: var(--paper); color: var(--ink); font-size: 14px; outline: none; }
+    .field input { min-height: 48px; padding: 0 13px; }
+    .field textarea { min-height: 150px; padding: 13px; resize: vertical; line-height: 1.6; }
+    .field input:focus, .field textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+    .field-hint { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .word-count { flex: 0 0 auto; font-weight: 700; }
+    .word-count[data-over-limit="true"] { color: var(--red); }
+    .submit-button { display: flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 15px; padding: 0 18px; border: 0; background: var(--ink); color: white; cursor: pointer; font-size: 11px; font-weight: 700; text-transform: uppercase; transition: background .2s, color .2s; }
+    .submit-button:hover { background: var(--lime); color: var(--ink); }
+    .submit-button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    .submit-button:disabled { background: #c4c2ba; color: #555650; cursor: not-allowed; }
+    .form-status { min-height: 1.5em; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    footer { display: flex; min-height: 82px; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 6.2%; background: var(--ink); color: white; }
+    footer small { color: #aaa; font-size: 10px; }
+    footer .wordmark { font-size: 19px; }
+    footer .wordmark-mark { width: 24px; height: 24px; font-size: 16px; }
+    @media (max-width: 760px) {
+      .topbar { min-height: 72px; padding: 16px 6%; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 9px; }
+      main { padding: 58px 6% 75px; }
+      .signup-layout { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .wordmark { gap: 7px; font-size: 21px; }
+      .wordmark-mark { width: 26px; height: 26px; font-size: 17px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { font-size: 9px; }
+      .name-fields { grid-template-columns: 1fr; }
+      .signup-form { gap: 16px; padding: 22px; }
+      footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <details class="edge-navigation">
+    <summary aria-label="Toggle site navigation"></summary>
+    <nav class="edge-panel" aria-label="Quick navigation">
+      <a class="wordmark" href="index.html" aria-label="Top Speed home"><span class="wordmark-mark">T</span> Top Speed</a>
+      <p class="edge-panel-label">Find your way</p>
+      <div class="edge-panel-links">
+        <a href="index.html">Home <span>01</span></a>
+        <a href="index.html#about">The feeling <span>02</span></a>
+        <a href="index.html#cards">The grid <span>03</span></a>
+        <a href="history.html">Our history <span>04</span></a>
+        <a href="ambassador.html" aria-current="page">Be an ambassador <span>05</span></a>
+        <a href="shop.html">Shop the deck <span>↗</span></a>
+      </div>
+    </nav>
+  </details>
+
+  <header class="topbar">
+    <a class="wordmark" href="index.html" aria-label="Top Speed home"><span class="wordmark-mark">T</span> Top Speed</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="history.html">Our history</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="signup-layout">
+      <section aria-labelledby="signup-title">
+        <p class="eyebrow">Join the starting grid</p>
+        <h1 id="signup-title">Be an <span>Ambassador</span></h1>
+        <div class="signup-copy">
+          <p>Love cars, card games, and bringing people together? Tell us a little about yourself and why you would like to represent Top Speed.</p>
+          <p class="setup-note">The form is ready, but applications are not being sent yet. We will connect sign-ups once a contact email is available. Your details stay in this page and are not submitted.</p>
+        </div>
+      </section>
+
+      <form class="signup-form" id="ambassador-form" novalidate>
+        <div class="name-fields">
+          <div class="field">
+            <label for="first-name">First name <span aria-hidden="true">*</span></label>
+            <input id="first-name" name="firstName" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="last-name">Last name <span aria-hidden="true">*</span></label>
+            <input id="last-name" name="lastName" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email address <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="description">A little about you <span aria-hidden="true">*</span></label>
+          <textarea id="description" name="description" aria-describedby="description-hint word-count" required></textarea>
+          <div class="field-hint" id="description-hint">
+            <span>Tell us why you would be a great Top Speed ambassador. Maximum 50 words.</span>
+            <span class="word-count" id="word-count" aria-live="polite">0 / 50 words</span>
+          </div>
+        </div>
+        <button class="submit-button" id="submit-application" type="button" disabled>
+          Check application <span aria-hidden="true">↗</span>
+        </button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        <noscript><p class="form-status">Enable JavaScript to check this form. Applications are not being sent yet.</p></noscript>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <a class="wordmark" href="index.html"><span class="wordmark-mark">T</span> Top Speed</a>
+    <small>Quick thinking. Close finishes.</small>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#ambassador-form");
+    const description = document.querySelector("#description");
+    const wordCount = document.querySelector("#word-count");
+    const submitButton = document.querySelector("#submit-application");
+    const formStatus = document.querySelector("#form-status");
+
+    function countWords(value) {
+      const trimmed = value.trim();
+      return trimmed ? trimmed.split(/\s+/).length : 0;
+    }
+
+    function updateWordCount() {
+      const count = countWords(description.value);
+      const overLimit = count > 50;
+      wordCount.textContent = `${count} / 50 words`;
+      wordCount.dataset.overLimit = String(overLimit);
+      description.setCustomValidity(overLimit ? "Please keep your description to 50 words or fewer." : "");
+    }
+
+    description.addEventListener("input", updateWordCount);
+    submitButton.addEventListener("click", () => {
+      updateWordCount();
+      if (!form.reportValidity()) {
+        formStatus.textContent = "Please complete each required field and keep your description within 50 words.";
+        return;
+      }
+
+      formStatus.textContent = "Your details are valid, but sign-ups are not connected yet. No information has been sent.";
+    });
+
+    submitButton.disabled = false;
+  </script>
+</body>
+</html>
