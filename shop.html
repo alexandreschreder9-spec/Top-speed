@@ -26,6 +26,21 @@
     body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
     a { color: inherit; }
     button { font: inherit; }
+    .edge-navigation { position: fixed; z-index: 3; top: 0; left: 0; width: 14px; height: 100dvh; }
+    .edge-navigation summary { position: absolute; inset: 0 auto 0 0; width: 14px; cursor: pointer; list-style: none; }
+    .edge-navigation summary::-webkit-details-marker { display: none; }
+    .edge-navigation summary::before { position: absolute; top: 50%; left: 0; width: 6px; height: 72px; background: var(--red); content: ""; transform: translateY(-50%); transition: width .2s, height .2s, background .2s; }
+    .edge-navigation summary::after { position: absolute; top: 50%; left: 12px; color: var(--ink); content: "MENU"; font-size: 9px; font-weight: 700; letter-spacing: .12em; opacity: 0; text-transform: uppercase; transform: translateY(-50%) rotate(180deg); transition: opacity .2s; writing-mode: vertical-rl; }
+    .edge-navigation:hover summary::before, .edge-navigation:focus-within summary::before, .edge-navigation[open] summary::before { width: 14px; height: 112px; background: var(--lime); }
+    .edge-navigation:hover summary::after, .edge-navigation:focus-within summary::after, .edge-navigation[open] summary::after { opacity: 1; }
+    .edge-panel { position: fixed; top: 0; left: 0; display: flex; width: min(290px, calc(100vw - 28px)); height: 100dvh; flex-direction: column; padding: 34px 28px; background: var(--ink); box-shadow: 12px 0 35px rgb(0 0 0 / 18%); color: white; transform: translateX(-105%); transition: transform .25s ease; }
+    .edge-navigation:hover .edge-panel, .edge-navigation:focus-within .edge-panel, .edge-navigation[open] .edge-panel { transform: translateX(0); }
+    .edge-panel .wordmark { margin-bottom: 58px; }
+    .edge-panel-label { margin-bottom: 16px; color: #aaa; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .edge-panel-links { display: grid; gap: 4px; }
+    .edge-panel-links a { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgb(255 255 255 / 18%); font-family: var(--display); font-size: 25px; font-weight: 600; text-decoration: none; text-transform: uppercase; }
+    .edge-panel-links a:hover, .edge-panel-links a[aria-current="page"] { color: var(--lime); }
+    .edge-panel-links a span { color: var(--red); font-family: var(--body); font-size: 10px; }
     .topbar { display: flex; min-height: 82px; align-items: center; justify-content: space-between; padding: 18px 6.2%; background: var(--ink); color: white; }
     .wordmark { display: inline-flex; align-items: center; gap: 10px; color: inherit; font-family: var(--display); font-size: 25px; font-weight: 800; line-height: 1; text-decoration: none; text-transform: uppercase; }
     .wordmark-mark { display: grid; width: 30px; height: 30px; place-items: center; background: var(--red); color: var(--ink); font-size: 20px; transform: skew(-8deg); }
@@ -114,6 +129,21 @@
   </style>
 </head>
 <body>
+  <details class="edge-navigation">
+    <summary aria-label="Toggle site navigation"></summary>
+    <nav class="edge-panel" aria-label="Quick navigation">
+      <a class="wordmark" href="index.html" aria-label="Top Speed home"><span class="wordmark-mark">T</span> Top Speed</a>
+      <p class="edge-panel-label">Find your way</p>
+      <div class="edge-panel-links">
+        <a href="index.html">Home <span>01</span></a>
+        <a href="index.html#about">The feeling <span>02</span></a>
+        <a href="index.html#cards">The grid <span>03</span></a>
+        <a href="history.html">Our history <span>04</span></a>
+        <a href="shop.html" aria-current="page">Shop the deck <span>↗</span></a>
+      </div>
+    </nav>
+  </details>
+
   <header class="topbar">
     <a class="wordmark" href="index.html" aria-label="Top Speed home"><span class="wordmark-mark">T</span> Top Speed</a>
     <nav class="nav-links" aria-label="Main navigation">
