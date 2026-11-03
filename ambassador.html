@@ -151,8 +151,8 @@
           <label for="description">A little about you <span aria-hidden="true">*</span></label>
           <textarea id="description" name="description" aria-describedby="description-hint word-count" required></textarea>
           <div class="field-hint" id="description-hint">
-            <span>Tell us why you would be a great Top Speed ambassador. minimum 50 words.</span>
-            <span class="word-count" id="word-count" aria-live="polite">50 / 500 words</span>
+            <span>Tell us why you would be a great Top Speed ambassador (50–200 words).</span>
+            <span class="word-count" id="word-count" aria-live="polite">0 / 200 words</span>
           </div>
         </div>
         <button class="submit-button" id="submit-application" type="button" disabled>
@@ -175,6 +175,8 @@
     const wordCount = document.querySelector("#word-count");
     const submitButton = document.querySelector("#submit-application");
     const formStatus = document.querySelector("#form-status");
+    const minWords = 50;
+    const maxWords = 200;
 
     function countWords(value) {
       const trimmed = value.trim();
@@ -183,17 +185,19 @@
 
     function updateWordCount() {
       const count = countWords(description.value);
-      const overLimit = count > 50;
-      wordCount.textContent = `${count} / 50 words`;
-      wordCount.dataset.overLimit = String(overLimit);
-      description.setCustomValidity(overLimit ? "Please keep your description to 50 words or fewer." : "");
+      const outsideLimits = count > 0 && (count < minWords || count > maxWords);
+      wordCount.textContent = `${count} / ${maxWords} words`;
+      wordCount.dataset.overLimit = String(count > maxWords);
+      description.setCustomValidity(
+        outsideLimits ? `Please write between ${minWords} and ${maxWords} words.` : ""
+      );
     }
 
     description.addEventListener("input", updateWordCount);
     submitButton.addEventListener("click", () => {
       updateWordCount();
       if (!form.reportValidity()) {
-        formStatus.textContent = "Please complete each required field and keep your description within 50 words.";
+        formStatus.textContent = `Please complete each required field and write a description of ${minWords}–${maxWords} words.`;
         return;
       }
 
